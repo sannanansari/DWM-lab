@@ -1,0 +1,58 @@
+mysql> select Year,Country,Products,sum(Profit) from Sales where (year = 2010 or year=2011) and (country='India' or country='Italy') group by Year,Country,Products with rollup;
++------+---------+----------+-------------+
+| Year | Country | Products | sum(Profit) |
++------+---------+----------+-------------+
+| 2010 | India   | Bike     |       10000 |
+| 2010 | India   | Cycle    |     1000000 |
+| 2010 | India   | Laptop   |        2000 |
+| 2010 | India   | NULL     |     1012000 |
+| 2010 | Italy   | Bike     |      500000 |
+| 2010 | Italy   | Cyle     |        2000 |
+| 2010 | Italy   | NULL     |      502000 |
+| 2010 | NULL    | NULL     |     1514000 |
+| 2011 | India   | AC       |        1000 |
+| 2011 | India   | Car      |       45000 |
+| 2011 | India   | TV       |      100000 |
+| 2011 | India   | NULL     |      146000 |
+| 2011 | Italy   | AC       |         100 |
+| 2011 | Italy   | Car      |       35000 |
+| 2011 | Italy   | TV       |      100000 |
+| 2011 | Italy   | NULL     |      135100 |
+| 2011 | NULL    | NULL     |      281100 |
+| NULL | NULL    | NULL     |     1795100 |
++------+---------+----------+-------------+
+18 rows in set (0.00 sec)
+
+
+mysql> select * from Sales where year = 2010 and country='India' or country='Italy';
++------+---------+----------+---------+
+| Year | Country | Products | Profit  |
++------+---------+----------+---------+
+| 2010 | India   | Cycle    | 1000000 |
+| 2010 | Italy   | Cyle     |    2000 |
+| 2011 | Italy   | Car      |   35000 |
+| 2010 | India   | Bike     |   10000 |
+| 2010 | Italy   | Bike     |  500000 |
+| 2011 | Italy   | TV       |  100000 |
+| 2011 | Italy   | AC       |     100 |
+| 2010 | India   | Laptop   |    1000 |
+| 2010 | India   | Laptop   |    1000 |
++------+---------+----------+---------+
+9 rows in set (0.00 sec)
+
+mysql> select * from Sales where year = 2010 and country='India' or country='Italy';
++------+---------+----------+---------+
+| Year | Country | Products | Profit  |
++------+---------+----------+---------+
+| 2010 | India   | Cycle    | 1000000 |
+| 2010 | Italy   | Cyle     |    2000 |
+| 2011 | Italy   | Car      |   35000 |
+| 2010 | India   | Bike     |   10000 |
+| 2010 | Italy   | Bike     |  500000 |
+| 2011 | Italy   | TV       |  100000 |
+| 2011 | Italy   | AC       |     100 |
+| 2010 | India   | Laptop   |    1000 |
+| 2010 | India   | Laptop   |    1000 |
++------+---------+----------+---------+
+9 rows in set (0.00 sec)
+
